@@ -1,0 +1,28 @@
+Agents and Controllers
+ - By separating who or what (the Agent) is Controlling something, we can generalise and re-use code for input and controls.
+ - One particular Controller has a set of input outlets.
+ - One particular Agent hasa set of input plugs.
+ - We plug in the Agent to the Controller.
+ - The Controller doesn't care if all or none of its outlets are plugged-in to an Agent's inputs.
+
+Agent
+ - Sends input to a particular Mover script, like CharacterMover.
+
+PlayerAgent: Agent
+ - Reads input from the player themselves
+
+AIAgent: Agent
+ - Reads input from a NavMeshAgent + some other script abilities.
+
+
+
+
+Agent has a list of strings mapped to Unity's input system.
+
+How the strings are sent to the Controller depends on its type:
+
+PlayerAgent simply sends them via getInput
+
+AIAgent sends them based on what its NavMeshAgent thinks + some other factors.
+ - E.g., based on the agent object's movement, play movement animations.
+ - E.g., if it gets close to the player, send Attack.
