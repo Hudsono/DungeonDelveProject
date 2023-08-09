@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 481995042327841608}
   - component: {fileID: 1788623314744564118}
   - component: {fileID: 2484499563464876031}
+  - component: {fileID: 6180452526017658819}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -176,6 +177,30 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6180452526017658819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788623314744564116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 052f6ab3043b1624ab336430f19d896b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Uses: 10
+  cooldown: 2
+  distance: 6
+  speed: 50
+  destinationMultiplier: 1
+  cameraHeight: 0.2
+  cam: {fileID: 1788623315372294395}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  characterController: {fileID: 1788623314744564118}
+  anim: {fileID: 0}
 --- !u!1 &1788623315372294390
 GameObject:
   m_ObjectHideFlags: 0

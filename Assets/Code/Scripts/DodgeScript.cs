@@ -13,7 +13,7 @@ public class DodgeScript : MonoBehaviour
     public Transform cam;
     public LayerMask layerMask;
     public CharacterController characterController;
-    public GameObject render;
+    public Animator anim;
 
     int maxUses;
     float cooldownTimer;
@@ -32,6 +32,7 @@ public class DodgeScript : MonoBehaviour
         {
             Dodge();
             Debug.Log("Execute Dodge");
+            anim.SetTrigger("Active");
         }
 
         if (Uses < maxUses)
@@ -53,12 +54,10 @@ public class DodgeScript : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, destination, Time.deltaTime * speed); //move the player to the new point
                 characterController.enabled = true;
                 Debug.Log("Hello");
-                render.SetActive(true);
             }
             else
             {
                 dodging = false;
-                render.SetActive(false);
             }
         }
     }
