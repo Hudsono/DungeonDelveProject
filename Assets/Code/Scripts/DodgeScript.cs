@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DodgeScript : MonoBehaviour
 {
@@ -28,13 +29,6 @@ public class DodgeScript : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            Dodge();
-            Debug.Log("Execute Dodge");
-            anim.SetTrigger("Active");
-        }
-
         if (Uses < maxUses)
         {
             if (cooldownTimer > 0) cooldownTimer -= Time.deltaTime;
@@ -53,7 +47,6 @@ public class DodgeScript : MonoBehaviour
                 characterController.enabled = false;
                 transform.position = Vector3.MoveTowards(transform.position, destination, Time.deltaTime * speed); //move the player to the new point
                 characterController.enabled = true;
-                Debug.Log("Hello");
             }
             else
             {
@@ -62,23 +55,28 @@ public class DodgeScript : MonoBehaviour
         }
     }
 
+    public void OnDodge(InputValue value)
+    {
+        Dodge();
+        Debug.Log("Execute Dodge");
+    }
+
     void Dodge()
     {
         if (Uses > 0)
         {
             Uses -= 1;
+            anim.SetTrigger("Active");
 
             RaycastHit hit;
             if(Physics.Raycast(cam.position, cam.forward, out hit, distance, layerMask)) //raycast hits a wall or object
             {
                 destination = hit.point * destinationMultiplier; //offset to stop clipping into wall upon arrival 
-                Debug.Log("Wall");
                 Debug.DrawLine(cam.position, hit.point * destinationMultiplier, Color.yellow, 2);
             }
             else //raycast hits nothing
             {
                 destination = (cam.position + cam.forward.normalized * distance) * destinationMultiplier;
-                Debug.Log("Open Space");
                 Debug.DrawRay(cam.position, (cam.forward * distance) * destinationMultiplier, Color.green, 2);
             }
 
